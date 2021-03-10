@@ -38,7 +38,7 @@ The `directory` should look like:
         ├── Depth 기반의 크롤링.ipynb  
         └── 공공데이터_태그 기반 크롤링.ipynb
 
-### 0. 개요
+## 0. 개요
 
 - 홈페이지에서 스크래핑/크롤링 을 통해 데이터 수집 시 다음과 같은 문제가 발생함
 
@@ -51,6 +51,44 @@ The `directory` should look like:
 - 따라서, [DOM Based Content Extraction via Text Density](http://www.ofey.me/papers/cetd-sigir11.pdf) 논문을 읽고 정리한 후, 관련 라이브러리를 공부
 
 - 라이브러리별 한계를 정리하였고, 새로운 **재귀적 DOM 기반의 크롤링 기법**을 개발
+
+
+## 1. 활용도
+### (1) Autoscraper 라이브러리
+
+| 사이트 예시 | 대응 여부 | 비고 |
+|:---:|:---:|:---:|
+| 기사 및 블로그 댓글, 상세정보 | O |  |
+| 뉴스 기사, 블로그 본문 | △ | 뉴스기사의 본문처럼 많은 텍스트 포함 시, 적합하지 않음 |
+| 테이블 형식 (공공데이터포털) | △ | 간혹 scraping하지 못하는 경우 발생 |
+| Ajax/javascript(동적) 으로 <br>데이터 받아오는 웹페이지 | O| Selenium과 결합 시, 대응 가능 |
+
+### (2) Goose3 라이브러리
+
+| 사이트 예시 | 대응 여부 | 비고 |
+|:---:|:---:|:---:|
+| 기사 및 블로그 댓글, 상세정보 | X | 작성자, 작성일 등 scraping 메서드 존재하나, 정확성 떨어짐 |
+| 뉴스 기사, 블로그 본문 | O | Goose3 라이브러리를 통해 제목, 본문 구별해서 추출 가능 |
+| 테이블 형식 (공공데이터포털) | X |  |
+| Ajax/javascript(동적) 으로 <br>데이터 받아오는 웹페이지 | X |  |
+
+### (3) 태그 기반 크롤링 기법
+
+| 사이트 예시 | 대응 여부 | 비고 |
+|:---:|:---:|:---:|
+| 기사 및 블로그 댓글, 상세정보 | O | 관련 태그 통해 수집 가능 |
+| 뉴스 기사, 블로그 본문 | O | 전체 기사, P 태그를 통해 부분 기사 등 수집 가능 |
+| 테이블 형식 (공공데이터포털) | O | 정형화된 표를 제공하는 형태로, 수집 후 전처리로 가능 |
+| 네이버쇼핑리뷰 | △ | 리뷰  평점은 가능, 사용자 및 날짜 부분 추후 전처리 필요|
+| 테이블 구조가 변하는 경우 | △ | tr 태그로 행 자체를 가져올 수 있지만, 추후 전처리 필요|
+| Ajax/javascript(동적) 으로 <br>데이터 받아오는 웹페이지 | O| Selenium과 결합 시, 대응 가능 |
+
+
+## 참고자료
+
+1. [Goose3 라이브러리](https://github.com/goose3/goose3)
+2. [Autoscraper 라이브러리](https://github.com/alirezamika/autoscraper)
+3. [DOM Based Content Extraction via Text Density](http://www.ofey.me/papers/cetd-sigir11.pdf)
 
 ## Author
 
